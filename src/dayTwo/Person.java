@@ -117,9 +117,9 @@ public class Person {
 
     @Override
     public String toString(){
-        return String.format("Person: %s %s %s %s %s %s %s",
+        return String.format("Person: %s %s %s %s %s %s",
                 this.firstName, this.lastName, this.getAge(), this.height, this.weight,
-                this.getSex().toString(), this.bloodType.toString());
+                this.getSex().toString());
     }
 
 }

@@ -65,19 +65,19 @@ public class Address {
 
     //constructor
 
-    public Address(String firstLine, String secondLine, String town, String city, String county, String postcode) {
-        this.firstLine = firstLine;
-        this.secondLine = secondLine;
-        this.town = town;
-        this.city = city;
-        this.county = county;
+    public Address(String firstLine, String postcode) {
+       this.firstLine = firstLine;
+        //this.secondLine = secondLine;
+        //this.town = town;
+        //this.city = city;
+        //this.county = county;
         this.postcode = postcode;
     }
 
     @Override
     public String toString() {
-        return String.format("Person: %s %s %s %s %s %s",
-                this.firstLine, this.secondLine, this.town, this.city, this.county, this.postcode);
+        return String.format("%s %s",
+                this.firstLine, this.postcode);
 
     }
 }

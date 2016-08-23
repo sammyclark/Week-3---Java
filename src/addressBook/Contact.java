@@ -48,7 +48,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return String.format("Person: %s %s %s %s %s",
+        return String.format("Contact: %s %s %s %s %s",
                 this.phoneNo, this.email, this.facebook, this.p, this.a);
 
     }

@@ -8,11 +8,9 @@ public class MainProgramme {
 
     public static void main(String[] args) {
 
-        generatedPeople.addPeople();
+        //generatedPeople.addPeople();
 
-        for(Person p : people) {
-            System.out.println(p);
-        }
+       commandGUI.display();
 
     }
 

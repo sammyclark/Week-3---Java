@@ -10,10 +10,10 @@ public class Employee extends Person {
     private LocalDate hireDate;
 
         Employee(String firstName, String lastName, short height, double weight, LocalDate birthDate,
-                SexType sex, BloodType bloodType, String pos, LocalDate hd)
+                SexType sex, String pos, LocalDate hd)
         {
 
-            super(firstName, lastName, height, weight, birthDate, sex, bloodType);
+            super(firstName, lastName, height, weight, birthDate, sex);
             this.position = pos;
             this.hireDate = hd;
         }

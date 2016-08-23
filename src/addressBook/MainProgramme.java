@@ -8,11 +8,13 @@ public class MainProgramme {
 
     public static void main(String[] args) {
 
-        AddedContact.addPeople();
+        //AddedContact.addPeople();
 
-        for(Contact p : contacts) {
-            System.out.println(p);
-        }
+        //for(Contact p : contacts) {
+            //System.out.println(p);
 
+        //}
+        commandGUI.display();
     }
 }
+

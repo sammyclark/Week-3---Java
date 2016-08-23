@@ -31,9 +31,12 @@ public class commandGUI {
         switch(choice) {
             case 1:
                 tempData = inputScreen();
+                TaskProcessing.createEmployee(tempData);
             case 2:
             case 3:
             case 4:
+                TaskProcessing.printAll();
+                display();
             case 5:
             case 6:
                 break;
@@ -47,19 +50,19 @@ public class commandGUI {
         System.out.print("Enter first name: ");
         employeeData.add(input.nextLine());
 
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter last name: ");
         employeeData.add(input.nextLine());
 
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter height: ");
         employeeData.add(input.nextLine());
 
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter weight: ");
         employeeData.add(input.nextLine());
 
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter DOB (YYYY/MM/DD): ");
         String dob = input.nextLine();
         String[] dobData = dob.split("/");
@@ -68,19 +71,15 @@ public class commandGUI {
             employeeData.add(dobData[i]);
         }
 
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter sex M/F: ");
         employeeData.add(input.nextLine());
 
-        input.nextLine();
-        System.out.print("Enter blood type (A/B/AB/O/RHESUS_NEG: ");
-        employeeData.add(input.nextLine());
-
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter position: ");
         employeeData.add(input.nextLine());
 
-        input.nextLine();
+        //input.nextLine();
         System.out.print("Enter hire date (YYYY/MM/DD): ");
         String hireData = input.nextLine();
         String[] HireDate = dob.split("/");

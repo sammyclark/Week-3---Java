@@ -38,25 +38,16 @@ public class Person {
     }
     //constructor
 
-    public Person(String firstName, String lastName, LocalDate birthDate) {
+    public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
-    }
-
-    //methods
-    public long getAge() {
-        if (birthDate == null) {
-            return 0;
-        }
-        long years = ChronoUnit.YEARS.between(birthDate, LocalDate.now());
-        return years;
+       // this.birthDate = birthDate;
     }
 
     @Override
     public String toString() {
-        return String.format("Person: %s %s %s",
-                this.firstName, this.lastName, this.getAge());
+        return String.format("%s %s",
+                this.firstName, this.lastName);
     }
 
 }
