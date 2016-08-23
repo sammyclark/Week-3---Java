@@ -73,4 +73,11 @@ public class Address {
         this.county = county;
         this.postcode = postcode;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Person: %s %s %s %s %s %s",
+                this.firstLine, this.secondLine, this.town, this.city, this.county, this.postcode);
+
+    }
 }

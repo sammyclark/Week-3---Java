@@ -45,4 +45,11 @@ public class Contact {
         this.p = p;
         this.a = a;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Person: %s %s %s %s %s",
+                this.phoneNo, this.email, this.facebook, this.p, this.a);
+
+    }
 }

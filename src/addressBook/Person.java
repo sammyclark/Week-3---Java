@@ -53,4 +53,10 @@ public class Person {
         return years;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Person: %s %s %s",
+                this.firstName, this.lastName, this.getAge());
+    }
+
 }
