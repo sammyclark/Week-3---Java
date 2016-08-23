@@ -85,14 +85,14 @@ public class Person {
     }
 
     public Person(String firstName, String lastName, short height, double weight,
-                  LocalDate birthDate, SexType sex, BloodType bloodType) {
+                  LocalDate birthDate, SexType sex) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.height = height;
         this.weight = weight;
         this.birthDate = birthDate;
         this.sex = sex;
-        this.bloodType = bloodType;
+        //this.bloodType = bloodType;
     }
 
     //methods
