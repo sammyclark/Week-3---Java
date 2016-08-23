@@ -121,5 +121,5 @@ public class Person {
                 this.firstName, this.lastName, this.getAge(), this.height, this.weight,
                 this.getSex().toString());
     }
-
+    
 }

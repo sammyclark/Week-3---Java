@@ -3,6 +3,7 @@ package dayTwo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import static dayTwo.generatedPeople.people;
 /**
  * Created by student on 23/08/2016.
  */
@@ -27,17 +28,28 @@ public class commandGUI {
 
         } while (choice < 1 || choice > 6);
 
+        int index;
         List<String> tempData = new ArrayList<>();
         switch(choice) {
             case 1:
                 tempData = inputScreen();
                 TaskProcessing.createEmployee(tempData);
+                display();
             case 2:
+                index = findFirstName();
+                tempData = inputScreen();
+                TaskProcessing.editDetails(index, tempData);
+                display();
             case 3:
+                TaskProcessing.removeEmployee(requestIndex());
+                display();
             case 4:
                 TaskProcessing.printAll();
                 display();
             case 5:
+                index = findFirstName();
+                System.out.println(people.get(index));
+                display();
             case 6:
                 break;
         }
@@ -90,5 +102,16 @@ public class commandGUI {
 
         return employeeData;
 
+    }
+
+    static int findFirstName() {
+        System.out. print("Enter first name: ");
+        String firstName = input.next();
+        return TaskProcessing.searchByFirstName(firstName);
+    }
+
+    static int requestIndex(){
+        System.out.print("Enter Employee index to remove: ");
+        return input.nextInt();
     }
 }

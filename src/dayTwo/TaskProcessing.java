@@ -9,11 +9,7 @@ import static dayTwo.generatedPeople.people;
  */
 public class TaskProcessing {
     static void createEmployee(List<String> data) {
-        SexType sex;
-        if (data.get(7).contains("M"))
-            sex = SexType.MALE;
-        else
-            sex = SexType.FEMALE;
+
 
 
         Employee temp = new Employee(
@@ -23,7 +19,7 @@ public class TaskProcessing {
                 Double.parseDouble(data.get(3)),
 
                 LocalDate.of(Integer.parseInt(data.get(4)), Integer.parseInt(data.get(5)), Integer.parseInt(data.get(6))),
-                sex, data.get(8),
+                checkSex(data.get(7)), data.get(8),
                 LocalDate.of(Integer.parseInt(data.get(9)), Integer.parseInt(data.get(10)), Integer.parseInt(data.get(11)))
 
         );
@@ -33,9 +29,45 @@ public class TaskProcessing {
 
     static void printAll() {
         for (Person e : people)
-            System.out.println(e);
+            System.out.println(String.format("%s" + e, people.indexOf(e)));
     }
 
+    static int searchByFirstName(String firstName) {
+        for (Person p : people) {
+            if(p.getFirstName().contains(firstName))
+                return people.indexOf(p);
+        }
+        return -1;
+    }
+
+    static void editDetails(int index, List<String> data) {
+        people.get(index).setFirstName(data.get(0));
+        people.get(index).setLastName(data.get(1));
+        people.get(index).setHeight(Short.parseShort(data.get(2)));
+        people.get(index).setWeight(Double.parseDouble(data.get(3)));
+        people.get(index).setBirthday(LocalDate.of(
+                Integer.parseInt(data.get(4)),
+                Integer.parseInt(data.get(5)),
+                        Integer.parseInt(data.get(6))));
+        people.get(index).setSex(checkSex(data.get(7)));
+        people.get(index).setPosition(data.get(8));
+        people.get(index).setHireDate(LocalDate.of(
+                Integer.parseInt(data.get(9)),
+                Integer.parseInt(data.get(10)),
+                Integer.parseInt(data.get(11))
+        ));
+
+    }
+    static SexType checkSex(String data) {
+        if (data.contains("M"))
+            return SexType.MALE;
+        else
+            return SexType.FEMALE;
+    }
+
+    static void removeEmployee(int index) {
+        people.remove(index);
+    }
 }
 
 

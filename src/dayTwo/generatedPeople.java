@@ -17,11 +17,9 @@ public class generatedPeople {
     public static Employee marie = new Employee("Marie", "Walker-Smith", (short)175, 62,
             LocalDate.of(1992, 12, 1), SexType.FEMALE, "Architect", LocalDate.of(2014, 9, 15));
 
-    public static List<Person> people = new ArrayList<>();
+    public static List<Employee> people = new ArrayList<>();
 
     static void addPeople(){
-        people.add(sarah);
-        people.add(alex);
         people.add(marie);
     }
 }
