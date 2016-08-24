@@ -8,9 +8,11 @@ public class MainProgramme {
 
     public static void main(String[] args) {
 
-        generatedPeople.addPeople();
+        //generatedPeople.addPeople();
 
-       commandGUI.display();
+       //commandGUI.display();
+
+        WelcomeWindow entry = new WelcomeWindow();
 
     }
 
