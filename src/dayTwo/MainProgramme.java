@@ -8,11 +8,12 @@ public class MainProgramme {
 
     public static void main(String[] args) {
 
-        //generatedPeople.addPeople();
+        generatedPeople.addPeople();
+        //TaskProcessing.executeGUI();
 
        //commandGUI.display();
 
-        WelcomeWindow entry = new WelcomeWindow();
+        WelcomeWindow gui = new WelcomeWindow();
 
     }
 
