@@ -9,11 +9,13 @@ public class Employee extends Person {
     private String position;
     private LocalDate hireDate;
 
+        Employee(){} //default constructor - creates empty object
+
         Employee(String firstName, String lastName, short height, double weight, LocalDate birthDate,
                 SexType sex, String pos, LocalDate hd)
         {
 
-            super(firstName, lastName, height, weight, birthDate, sex);
+            super(firstName, lastName, height, weight, birthDate, sex); //super invokes person constructor
             this.position = pos;
             this.hireDate = hd;
         }

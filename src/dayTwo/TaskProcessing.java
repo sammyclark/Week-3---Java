@@ -21,15 +21,17 @@ public class TaskProcessing {
                 LocalDate.of(Integer.parseInt(data.get(4)), Integer.parseInt(data.get(5)), Integer.parseInt(data.get(6))),
                 checkSex(data.get(7)), data.get(8),
                 LocalDate.of(Integer.parseInt(data.get(9)), Integer.parseInt(data.get(10)), Integer.parseInt(data.get(11)))
-
         );
 
-        people.add(temp);
+        people.add(temp);   //adds a new person to employee database
+                            //this is only saved while the programme runs
     }
 
     static void printAll() {
         for (Person e : people)
             System.out.println(String.format("%s" + e, people.indexOf(e)));
+        //e calls the toString method in the Employee class
+        //indexOf prints the index number of the people
     }
 
     static int searchByFirstName(String firstName) {
@@ -38,6 +40,7 @@ public class TaskProcessing {
                 return people.indexOf(p);
         }
         return -1;
+        //returns -1 if the person is not found
     }
 
     static void editDetails(int index, List<String> data) {
@@ -58,6 +61,7 @@ public class TaskProcessing {
         ));
 
     }
+
     static SexType checkSex(String data) {
         if (data.contains("M"))
             return SexType.MALE;

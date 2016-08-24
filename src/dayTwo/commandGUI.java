@@ -10,7 +10,7 @@ import static dayTwo.generatedPeople.people;
 public class commandGUI {
     static Scanner input = new Scanner(System.in);
 
-    static void display() {
+    static void display() { //method to call the display
         int choice;
         do {
             System.out.println("Welcome to the Employee Database");
@@ -22,34 +22,40 @@ public class commandGUI {
             System.out.println("6. Terminate");
             System.out.println();
             System.out.println("Enter a number between 1 and 6: ");
+            //display output
 
             //read input
-            choice = input.nextInt();
+            choice = input.nextInt(); //excapsulation - turns string input into an int
 
         } while (choice < 1 || choice > 6);
 
         int index;
-        List<String> tempData = new ArrayList<>();
+        List<String> tempData = new ArrayList<>(); //tempData collects information given
         switch(choice) {
             case 1:
                 tempData = inputScreen();
                 TaskProcessing.createEmployee(tempData);
-                display();
+                display(); //recursive
+                break;
             case 2:
                 index = findFirstName();
                 tempData = inputScreen();
                 TaskProcessing.editDetails(index, tempData);
                 display();
+                break;
             case 3:
                 TaskProcessing.removeEmployee(requestIndex());
                 display();
+                break;
             case 4:
                 TaskProcessing.printAll();
                 display();
+                break;
             case 5:
                 index = findFirstName();
                 System.out.println(people.get(index));
                 display();
+                break;
             case 6:
                 break;
         }
@@ -105,7 +111,7 @@ public class commandGUI {
     }
 
     static int findFirstName() {
-        System.out. print("Enter first name: ");
+        System.out.print("Enter first name: ");
         String firstName = input.next();
         return TaskProcessing.searchByFirstName(firstName);
     }

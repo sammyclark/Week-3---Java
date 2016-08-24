@@ -6,7 +6,10 @@ import java.time.temporal.ChronoUnit;
 /**
  * Created by student on 23/08/2016.
  */
-public class Person {
+public abstract class Person {
+    //abstract class - instance of object not created. Class is only used for definition
+    //abstract class because we never make a person, we always make an employee
+
     //fields
     private String firstName;
     private String lastName;
@@ -76,7 +79,7 @@ public class Person {
     }
 
     //constructors overloading
-    Person(){}
+    Person(){} //default constructor - creates empty object
 
     public Person(String firstName, String lastName, LocalDate birthDate) {
         this.firstName = firstName;
