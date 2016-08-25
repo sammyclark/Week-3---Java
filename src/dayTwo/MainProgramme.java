@@ -9,12 +9,13 @@ public class MainProgramme {
     public static void main(String[] args) {
 
         generatedPeople.addPeople();
-        //TaskProcessing.executeGUI();
+
 
        //commandGUI.display();
 
-        WelcomeWindow gui = new WelcomeWindow();
+        new WelcomeWindow();
 
     }
 
+    //run as few things on the main programme as possible
 }

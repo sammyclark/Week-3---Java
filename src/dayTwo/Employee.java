@@ -36,9 +36,13 @@ public class Employee extends Person {
         this.hireDate = hireDate;
     }
 
+    //added getter and setter for employee properties
+
     @Override
     public String toString() {
         return String.format("Employee Name: %s %s %s", super.toString(), this.position, this.hireDate);
         }
+
+    //added the employee properties to the person properties
 
 }

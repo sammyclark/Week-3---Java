@@ -3,7 +3,7 @@ package addressBook;
 /**
  * Created by student on 23/08/2016.
  */
-public class Contact {
+public class Contact extends Person{
     //fields
     private String phoneNo;
     private String email;
@@ -38,18 +38,22 @@ public class Contact {
     }
 
     //constructor
-    public Contact(String phoneNo, String email, String facebook, Person p, Address a) {
+
+    Contact(){}//default constructor
+
+    public Contact(String firstName, String lastName, String phoneNo, String email, String facebook,
+                   Address a) {
+        super(firstName, lastName); //invokes person constructor
         this.phoneNo = phoneNo;
         this.email = email;
         this.facebook = facebook;
-        this.p = p;
         this.a = a;
     }
 
     @Override
     public String toString() {
         return String.format("Contact: %s %s %s %s %s",
-                this.phoneNo, this.email, this.facebook, this.p, this.a);
-
+                super.toString(), this.phoneNo, this.email, this.facebook, this.a);
     }
+    //displays contact properties as a string
 }

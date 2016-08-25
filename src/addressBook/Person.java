@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Created by student on 23/08/2016.
  */
-public class Person {
+public abstract class Person { //person class only used for definition
     //fields
     private String firstName;
     private String lastName;
@@ -37,6 +37,8 @@ public class Person {
         this.birthDate = birthDate;
     }
     //constructor
+
+    Person() {}
 
     public Person(String firstName, String lastName) {
         this.firstName = firstName;

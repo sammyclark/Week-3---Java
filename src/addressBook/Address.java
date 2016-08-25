@@ -3,7 +3,7 @@ package addressBook;
 /**
  * Created by student on 23/08/2016.
  */
-public class Address {
+public  class Address {
 
     private String firstLine;
     private String secondLine;

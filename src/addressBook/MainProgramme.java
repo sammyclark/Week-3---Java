@@ -1,5 +1,7 @@
 package addressBook;
 
+import dayTwo.*;
+
 import static addressBook.AddedContact.contacts;
 /**
  * Created by student on 23/08/2016.
@@ -14,7 +16,7 @@ public class MainProgramme {
             //System.out.println(p);
 
         //}
-        commandGUI.display();
+        new WelcomeWindow();
     }
 }
 

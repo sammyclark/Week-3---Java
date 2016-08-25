@@ -8,13 +8,6 @@ import static dayTwo.generatedPeople.people;
  * Created by student on 23/08/2016.
  */
 public class TaskProcessing {
-    static WelcomeWindow gui;
-
-    void executeGUI() {
-
-         gui = new WelcomeWindow();
-
-    }
 
     static void createEmployee(List<String> data) {
 

@@ -5,8 +5,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static dayTwo.generatedPeople.people;
 
@@ -38,7 +42,7 @@ public class MainWindow implements ActionListener{
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenu editMenu;
-    private JMenuItem newMenuItem, exitMenuItem, indexMenuItem;
+    private JMenuItem newMenuItem, exitMenuItem, indexMenuItem; //this is an example of one line
 
     private JPanel content;
     private JPanel listPanel;
@@ -47,6 +51,10 @@ public class MainWindow implements ActionListener{
     private JPanel btnPanel;
 
     private JList employeeList;
+    private int employeeIndex;
+    private boolean createNew;
+
+    //declared components
 
     public MainWindow() {
         JFrame mainFrame = new JFrame("Employee Database");
@@ -66,7 +74,9 @@ public class MainWindow implements ActionListener{
                 }
             }
         };
-        //created the main window with a closing function
+        //created constructor to build the main frame.
+        //not resizable
+        //program terminated using a windowClosing pop up method
 
         Dimension di = mainFrame.getToolkit().getScreenSize();
         mainFrame.setLocation(di.width/2 - mainFrame.getWidth()/2,di.height/2 - mainFrame.getHeight()/2);
@@ -77,17 +87,24 @@ public class MainWindow implements ActionListener{
 
         mainFrame.setJMenuBar(createMenu());
 
+        //set the menu bar
+
         content = (JPanel) mainFrame.getContentPane();
         content.setLayout(new GridLayout(1,2,5,5));
+
+        //created the content panel (main box) - list panel and field panel inside the content panel
+        prepareJList();
 
         listPanel = new JPanel();
         listPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         JScrollPane scrollPane = new JScrollPane(createEmployeeList());
         scrollPane.setPreferredSize(new Dimension(380,335));
         listPanel.add(scrollPane);
+        listPanel.setVisible(false);
         content.add(listPanel);
 
         //created list panel - list of employees
+
 
         fieldPanel = new JPanel();
         TitledBorder title;
@@ -102,6 +119,8 @@ public class MainWindow implements ActionListener{
 
         mainFrame.setVisible(true);
 
+        //means the main frame can be seen
+
     }
 
     private JMenuBar createMenu() {
@@ -113,7 +132,9 @@ public class MainWindow implements ActionListener{
         newMenuItem = new JMenuItem("New");
         newMenuItem.setMnemonic(KeyEvent.VK_N);
         newMenuItem.addActionListener(this);
+        //action listener invokes controller
         fileMenu.add(newMenuItem);
+
 
         exitMenuItem = new JMenuItem("Exit");
         exitMenuItem.setMnemonic(KeyEvent.VK_E);
@@ -121,6 +142,7 @@ public class MainWindow implements ActionListener{
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
+        //adds file to menu bar - file has new and exit options
 
         editMenu = new JMenu("Edit");
         editMenu.setMnemonic(KeyEvent.VK_D);
@@ -129,17 +151,44 @@ public class MainWindow implements ActionListener{
         indexMenuItem.addActionListener(this);
         editMenu.add(indexMenuItem);
 
+
         menuBar.add(editMenu);
+        //adds edit to menu bar - edit has search option
 
         return menuBar;
     }
 
-    private JList createEmployeeList(){
-        employeeList = new JList(people.toArray());
+    private void prepareJList() {
+        employeeList = new JList();
         employeeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        employeeList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                employeeIndex = employeeList.getSelectedIndex(); //gets index of whatever is in the list and selects it
+                if (people.size() > 0 && employeeIndex != -1)
+                    loadEmployeeFields(employeeIndex); //if there is something display it
+                else
+                    clearTxtFields(); //if there is not, keep text fields empty
+            }
+        });
+    }
+
+    //dynamically reloads list
+
+    private JList createEmployeeList(){
+        DefaultListModel listModel = new DefaultListModel();
+        if(people.size() > 0) {
+            for (Employee e: people)
+                listModel.addElement(e);
+        }
+        employeeList.setModel(listModel);
+        //if there are people in the employee list, it is displayed - dynamic display
 
         return employeeList;
+
     }
+
+    //displays list of employees - however, does not dynamically reload list without prepareJList
 
     private JPanel createFieldsPanel() {
         inputPanel = new JPanel();
@@ -164,7 +213,7 @@ public class MainWindow implements ActionListener{
         txtWeight = new JTextField();
         inputPanel.add(txtWeight);
 
-        lblBirthdate = new JLabel("Birth Date (YYYY/MM/DD)");
+        lblBirthdate = new JLabel("Birth Date (YYYY-MM-DD)");
         inputPanel.add(lblBirthdate);
         txtBirthdate = new JTextField();
         inputPanel.add(txtBirthdate);
@@ -179,7 +228,7 @@ public class MainWindow implements ActionListener{
         txtPosition = new JTextField();
         inputPanel.add(txtPosition);
 
-        lblHireDate = new JLabel("Hire Date");
+        lblHireDate = new JLabel("Hire Date (YYYY-MM-DD)");
         inputPanel.add(lblHireDate);
         txtHireDate = new JTextField();
         inputPanel.add(txtHireDate);
@@ -197,6 +246,16 @@ public class MainWindow implements ActionListener{
         btnupdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(createNew) {
+                    TaskProcessing.createEmployee(getFieldsInfo());
+                    createEmployeeList();
+                    createNew = false;
+                    clearTxtFields();
+                }
+                else{
+                    TaskProcessing.editDetails(employeeIndex, getFieldsInfo());
+                    createEmployeeList();
+                }
 
             }
         });
@@ -208,6 +267,8 @@ public class MainWindow implements ActionListener{
         btnremove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                TaskProcessing.removeEmployee(employeeIndex); //removes the employee at the index selected
+                createEmployeeList();
 
             }
         });
@@ -220,45 +281,72 @@ public class MainWindow implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
             if("New".equals(action)) {
+                clearTxtFields();
+                createNew = true;
+                listPanel.setVisible(true);
                 fieldPanel.setVisible(true);
             } else if ("Exit".equals(action)) {
                 System.exit(0);
+            } else if ("Search".equals(action)) {
+                String fnSearch = JOptionPane.showInputDialog("Enter first name");
+                employeeIndex = TaskProcessing.searchByFirstName(fnSearch);
+                loadEmployeeFields((employeeIndex)); //when user inputs string, it is searched for
+                if(employeeIndex != -1)
+                    loadEmployeeFields(employeeIndex);
+                else
+                    JOptionPane.showMessageDialog(null, "Cannot find it");
             }
 
 
     }
 
-    public JTextField getTxtFirstName() {
-        return txtFirstName;
+    private void clearTxtFields() {
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtHeight.setText("");
+        txtWeight.setText("");
+        txtBirthdate.setText("");
+        txtSex.setText("");
+        txtPosition.setText("");
+        txtHireDate.setText("");
+    }
+    //clears all text fields for employee details
+
+    private void loadEmployeeFields(int index) {
+        txtFirstName.setText(people.get(index).getFirstName());
+        txtLastName.setText(people.get(index).getLastName());
+        txtHeight.setText(Short.toString(people.get(index).getHeight()));
+        txtWeight.setText(Double.toString(people.get(index).getWeight()));
+        txtBirthdate.setText(people.get(index).getBirthday().toString());
+        txtSex.setText(people.get(index).getSex().toString());
+        txtPosition.setText(people.get(index).getPosition());
+        txtHireDate.setText(people.get(index).getHireDate().toString());
     }
 
-    public JTextField getTxtLastName() {
-        return txtLastName;
+    private List<String> getFieldsInfo() {
+        List<String> data = new ArrayList<>();
+
+        data.add(txtFirstName.getText());
+        data.add(txtLastName.getText());
+        data.add(txtHeight.getText());
+        data.add(txtWeight.getText());
+
+        String[] stringDOB = txtBirthdate.getText().split("-");
+        data.add(stringDOB[0]);
+        data.add(stringDOB[1]);
+        data.add(stringDOB[2]);
+
+        data.add(txtSex.getText());
+        data.add(txtPosition.getText());
+
+        String[] stringHireDate = txtHireDate.getText().split("-");
+        data.add(stringHireDate[0]);
+        data.add(stringHireDate[1]);
+        data.add(stringHireDate[2]);
+
+        return data;
     }
 
-    public JTextField getTxtHeight() {
-        return txtHeight;
-    }
+    //collects the data from the texts fields
 
-    public JTextField getTxtWeight() {
-        return txtWeight;
-    }
-
-    public JTextField getTxtBirthdate() {
-        return txtBirthdate;
-    }
-
-    public JTextField getTxtSex() {
-        return txtSex;
-    }
-
-    public JTextField getTxtPosition() {
-        return txtPosition;
-    }
-
-    public JTextField getTxtHireDate() {
-        return txtHireDate;
-    }
-
-    public JPanel getInputPanel() {return inputPanel;}
 }

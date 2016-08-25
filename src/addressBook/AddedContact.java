@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class AddedContact {
 
-    public static Contact sarah = new Contact("07808018650", "sarah.s.clark@hotmail.com",
-            "www.facebook.com/sammykinsclark", new Person("Sarah", "Clark"),
-            new Address("106 Dolphin Square", "SW1V 3LX"));
+    public static Contact sarah = new Contact("Sarah", "Clark", "07808018650", "sarah.s.clark@hotmail.com",
+            "www.facebook.com/sammykinsclark",
+          new Address("106 Dolphin Square", "SW1V 3LX"));
 
     public static List<Contact> contacts = new ArrayList<>();
 
     static void addPeople() {
-        contacts.add(sarah);
+       contacts.add(sarah);
     }
 
 
