@@ -51,7 +51,7 @@ public class MainWindow implements ActionListener{
     private JPanel btnPanel;
 
     private JList employeeList;
-    private int employeeIndex;
+    private int employeeIndex = -1;
     private boolean createNew;
 
     //declared components
@@ -246,17 +246,19 @@ public class MainWindow implements ActionListener{
         btnupdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(createNew) {
+                if(createNew && employeeList.isSelectionEmpty()) {
                     TaskProcessing.createEmployee(getFieldsInfo());
                     createEmployeeList();
                     createNew = false;
                     clearTxtFields();
                 }
-                else{
+                else
+                {
                     TaskProcessing.editDetails(employeeIndex, getFieldsInfo());
                     createEmployeeList();
                 }
-
+                createNew = false;
+                employeeIndex = -1;
             }
         });
         btnPanel.add(btnupdate);
@@ -267,9 +269,13 @@ public class MainWindow implements ActionListener{
         btnremove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TaskProcessing.removeEmployee(employeeIndex); //removes the employee at the index selected
-                createEmployeeList();
-
+                if (employeeIndex >= 0) {
+                    TaskProcessing.removeEmployee(employeeIndex); //removes the employee at the index selected
+                    createEmployeeList();
+                    employeeIndex = -1;
+                } else {
+                    JOptionPane.showMessageDialog(null, "No employee selected!");
+                }
             }
         });
         btnPanel.add(btnremove);
