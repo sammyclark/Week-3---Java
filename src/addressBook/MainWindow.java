@@ -19,11 +19,7 @@ public class MainWindow {
     private JMenu fileMenu, editMenu;
     private JMenuItem menuNew, menuExit, menuSearch;
     //containers for menu
-    private JPanel content;
-    private JPanel listPanel;
-    private JPanel fieldPanel;
-    private JPanel inputPanel;
-    private JPanel btnPanel;
+    private JPanel content, listPanel, fieldPanel, inputPanel, btnPanel;
     //containers for panels
 
     public MainWindow() {
