@@ -282,6 +282,7 @@ public class MainWindow implements ActionListener{
         String action = e.getActionCommand();
             if("New".equals(action)) {
                 clearTxtFields();
+                if(employeeIndex < 0)
                 createNew = true;
                 listPanel.setVisible(true);
                 fieldPanel.setVisible(true);
