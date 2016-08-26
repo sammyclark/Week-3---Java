@@ -64,9 +64,7 @@ public class Menu {
                 //  display();
                 break;
             case 'O':
-                compLap.sort()
                 TaskProcessing.printAll();
-
                 display();
                 break;
             case 'L':
