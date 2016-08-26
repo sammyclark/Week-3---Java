@@ -104,4 +104,5 @@ public abstract class Computer {
                 this.type, this.model, this.cpuType, this.cpuSpeed, this.hdCap,
                 this.graphType, this.price, this.ram);
     }
+    //writes out properties as string
 }

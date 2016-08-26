@@ -1,12 +1,11 @@
-package addressBook;
+package Assessment;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 /**
- * Created by student on 23/08/2016.
+ * Created by student on 26/08/2016.
  */
-public abstract class Person { //person class only used for definition
+public abstract class Person {
     //fields
     private String firstName;
     private String lastName;
@@ -43,7 +42,7 @@ public abstract class Person { //person class only used for definition
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-       // this.birthDate = birthDate;
+        // this.birthDate = birthDate;
     }
 
     @Override
@@ -51,5 +50,4 @@ public abstract class Person { //person class only used for definition
         return String.format("%s %s",
                 this.firstName, this.lastName);
     }
-
 }
