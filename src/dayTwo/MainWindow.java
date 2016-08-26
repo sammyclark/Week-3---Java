@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -247,12 +248,16 @@ public class MainWindow implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(createNew && employeeList.isSelectionEmpty()) {
-                    TaskProcessing.createEmployee(getFieldsInfo());
-                    createEmployeeList();
-                    createNew = false;
-                    clearTxtFields();
-                }
-                else
+                    try {
+                        TaskProcessing.newEmployee(getFieldsInfo());
+                        createEmployeeList();
+                       // createNew = false;
+                        clearTxtFields();
+                    } catch (SQLException createEx) {
+                        JOptionPane.showMessageDialog(null, "ERROR ADDING EMPLOYEE" +
+                        System.lineSeparator() + createEx);
+                    }
+                } else
                 {
                     TaskProcessing.editDetails(employeeIndex, getFieldsInfo());
                     createEmployeeList();
@@ -337,19 +342,10 @@ public class MainWindow implements ActionListener{
         data.add(txtLastName.getText());
         data.add(txtHeight.getText());
         data.add(txtWeight.getText());
-
-        String[] stringDOB = txtBirthdate.getText().split("-");
-        data.add(stringDOB[0]);
-        data.add(stringDOB[1]);
-        data.add(stringDOB[2]);
-
+        data.add(txtBirthdate.getText());
         data.add(txtSex.getText());
         data.add(txtPosition.getText());
-
-        String[] stringHireDate = txtHireDate.getText().split("-");
-        data.add(stringHireDate[0]);
-        data.add(stringHireDate[1]);
-        data.add(stringHireDate[2]);
+        data.add(txtHireDate.getText());
 
         return data;
     }

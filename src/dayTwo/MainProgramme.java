@@ -6,9 +6,9 @@ import static dayTwo.generatedPeople.people;
  */
 public class MainProgramme {
 
-    public static void main(String[] args) {
+    public static void main(String[] args )throws Exception {
 
-        generatedPeople.addPeople();
+     TaskProcessing.prepareDb();
 
 
        //commandGUI.display();
